@@ -26,7 +26,6 @@ install:
     - SET PERL_MB_OPT=--install_base C:/_P5
     - SET PERL_MM_OPT=INSTALL_BASE=C:/_P5
     - perl -v
-    - cpanm --notest File::Find::Object Perl::Tidy Task::FreecellSolver::Testing  Test::Code::TidyAll Test::TrailingSpace
     - echo %PATH%
 build: off
 test_script:
@@ -34,15 +33,13 @@ test_script:
     - set HARNESS_BREAK=1
     - set HARNESS_VERBOSE=1
     - set FCS_USE_TEST_RUN=1
-    - gmake pretest
-    - perl run-tests.pl
     - gmake rules
     - gmake pot
     - gmake mo
     - python3 setup.py py2exe
     - appveyor DownloadFile https://sourceforge.net/projects/pysolfc/files/PySolFC-Cardsets/PySolFC-Cardsets-2.0/PySolFC-Cardsets-2.0.tar.bz2/download -FileName cardsets.tar.bz2
     - tar xf cardsets.tar.bz2
-    - xargs -a scripts/cardsets_to_bundle -I {} cp -rt dist/data/ PySolFC-Cardsets-2.0/{}
+    - xargs -ta scripts/cardsets_to_bundle -I {} cp -rt dist/data/ PySolFC-Cardsets-2.0/{}
     - 7z a -r pysol_win_dist.7z dist\
     - SET PYTHONPATH=%cd%
     - python3 scripts\create_iss.py
