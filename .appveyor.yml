@@ -38,7 +38,7 @@ test_script:
     - python3 setup.py py2exe
     - appveyor DownloadFile https://sourceforge.net/projects/pysolfc/files/PySolFC-Cardsets/PySolFC-Cardsets-2.0/PySolFC-Cardsets-2.0.tar.bz2/download -FileName cardsets.tar.bz2
     - tar xf cardsets.tar.bz2
-    - xargs -a scripts/cardsets_to_bundle -I {} cp -rt dist/data/ cardsets/{}
+    - xargs -a scripts/cardsets_to_bundle -I {} cp -rt dist/data/ PySolFC-Cardsets-2.0/{}
     - 7z a -r pysol_win_dist.7z dist\
     - SET PYTHONPATH=%cd%
     - python3 scripts\create_iss.py
@@ -48,7 +48,7 @@ artifacts:
     - path: pysol_win_dist.7z
       name: pysol_win_dist
 
-    - path: PySolFC_*_setup.exe
+    - path: dist\PySolFC_*_setup.exe
       name: pysol_win_installer
 cache:
     - C:\_P5 -> .appveyor.yml
