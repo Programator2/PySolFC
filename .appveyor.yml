@@ -4,6 +4,10 @@ environment:
         - PYTHON: "C:\\PYTHON34"
 # Shamelessly taken from https://github.com/plicease/Dist-Zilla-PluginBundle-Author-Plicease/blob/master/.appveyor.yml
 # Thanks!
+init:
+    - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+on_finish:
+    - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 install:
     - choco install strawberryperl
     - copy %PYTHON%\python.exe %PYTHON%\python3.exe
